@@ -1,2 +1,3 @@
-# C-dula-de-cr-dito
-É um front desenvolvido com ferramentas básicas
+# Cálculo de cédulas de crédito
+
+Ferramentas utilizadas: HTML, Css, Bootstrap, Javascript e Jquery.
