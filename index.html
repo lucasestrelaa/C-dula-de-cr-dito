@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    label,
+    h1,
+    h2,
+    h3 {
+        color: rgb(0, 0, 0);
+    }
+
+    body {
+        background-color: #173551 !important;
+    }
+
+    .background {
+        background-color: #f18f01;
+    }
+
+    .card {
+        border: 10px solid #000;
+        margin: 5px;
+        background-color: #e9ecef !important;
+    }
+
+    .info {
+        padding: 10px 10px 10px 10px;
+        color: rgb(0, 0, 0);
+        border: 5px solid #000;
+    }
+
+    .credito {
+        padding: 10px 10px 10px 10px;
+        color: rgb(0, 0, 0);
+        border: 5px solid #000;
+    }
+
+    .deducoes {
+        padding: 10px 10px 10px 10px;
+        color: rgb(0, 0, 0);
+        border: 5px solid #000;
+    }
+
+    .disponivel {
+        padding: 10px 10px 10px 10px;
+        color: rgb(0, 0, 0);
+        border: 5px solid #000;
+    }
+
+    .btn-color {
+        background-color: #173551 !important;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="background">
+            <form>
+                <div class="card info">
+                    <div class="row">
+                        <h1 style="color: #000000;">Base de calculo</h1>
+                        <div class="form-group col-md-2">
+                            <label for="inputEmail4">N° Série</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="email" class="form-control" id="inputEmail4" placeholder="N° série">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputEmail4">CCI</label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <input type="text" class="form-control" id="inputPassword4" placeholder="CCI">
+                        </div>
+                    </div>
+                </div>
+                <div class="card credito">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Créditos</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="totalCredito" step=0.1
+                                placeholder="Crédito bruto total" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="inputAddress">Crédito bruto em contrato</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="number" class="form-control" id="inputCredito" step=0.1
+                                onchange="somaCredito()" placeholder="Crédito bruto">
+                        </div>
+                        <!--<div class="col-md-3">
+                            <label for="inputAddress">Valor líquido em contrato</label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="inputAddress" step=0.1 
+                                placeholder="Valor líquido em contrato">
+                        </div>-->
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="inputAddress">Address</label>-->
+                    <!--<input type="number" class="form-control" id="inputAddress" placeholder="Custas de registro">
+                    </div>-->
+                </div>
+                <div class="card deducoes">
+                    <!--Título-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Débitos</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="totalDeducoes" placeholder="Deduções"
+                                readonly>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--Tarifas-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>IOF e tarifas</h4>
+                        </div>
+                        <div class="col-md-6"> <input type="number" class="form-control" id="totalTarifas"
+                                onchange="somaDeducoes()" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="inputAddress">TC</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" id="TC" step=0.1 onchange="somaTarifas()"
+                                        placeholder="TC">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="inputAddress">TAB</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" id="TAB" step=0.1 onchange="somaTarifas()"
+                                        placeholder="TAB">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="inputAddress">IOF</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <input type="number" class="form-control" id="IOF" step=0.1 onchange="somaTarifas()"
+                                        placeholder="IOF">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!--<div class="form-group">-->
+                    <!--<label for="inputAddress">Address</label>-->
+                    <!--<input type="number" class="form-control" id="inputAddress"
+                            placeholder="Custas de registro realizado">
+                    </div>-->
+                    <!--IQ-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>IQ</h4>
+                        </div>
+                        <div class=" col-md-6"> <input type="number" class="form-control" id="totalIQ"
+                                placeholder="crédito" step=0.1 onchange="somaDeducoes()" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label for="inputAddress">IQ</label>
+                        </div>
+                        <div class="col-md-11"><input type="number" class="form-control" step=0.1 id="inputIQ"
+                                onchange="somaIQ()" placeholder="crédito">
+                        </div>
+                    </div>
+                    <hr>
+                    <!--Custas de registro-->
+                    <div class="row">
+                        <!--<label for="inputAddress">Address</label>-->
+                        <div class="col-md-6">
+                            <h4>Custas de registro</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" class="form-control" id="totalCstRgt"
+                                placeholder="Custas de registro (realizado)" onchange="somaDeducoes()" readonly>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="inputAddress">Custas de registro (Certdox)</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="number" class="form-control" id="inputCstRgt" step=0.1 onchange="somaCtsRgt()"
+                                placeholder="Custas de registro (realizado)">
+                        </div>
+                    </div>
+                    <hr>
+                    <!--Despesas com terceiros-->
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Despesa com terceiros</h4>
+                            </div>
+                            <div class="col-md-6"> <input type="number" class="form-control" id="totalDespesas3"
+                                    step=0.1 onchange="somaDeducoes()" readonly></div>
+                        </div>
+                    </div>
+                    <div class="newDespesa"></div>
+                    <button class="add btn btn-primary btn-color" tabindex="false">Cadastrar despesas</button>
+                </div>
+                <div class="card disponivel">
+                    <h4>Crédito Líq. destinado ao cliente</h4>
+                    <div class="form-group">
+                        <label for="inputAddress">Crédito Líq. destinado ao cliente</label>
+                        <input type="number" class="form-control" id="creditoCliente" readonly step=0.1>
+                    </div>
+                </div>
+                <!--PF ou PJ
+                        <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck"> PF </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck"> PJ </label>
+                        </div>
+                    </div>-->
+                <!--<button type="submit" class="btn btn-primary">Calcular</button>-->
+                <br>
+            </form>
+        </div>
+    </div>
+</body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+<script>
+    /*Valráveis globais*/
+    let cont = 1;
+    /*Layout*/
+    $('.add').click(function (e) {
+        e.preventDefault();
+        console.log('adicionar');
+        $('.newDespesa').append(
+            '<div id="despesa' + cont + '" class="despesa ' + cont + '">' +
+            '<div class="row">' +
+
+
+            '    <div class="col-md-2">' +
+            '   <h5 >despesa (' + cont + ')</h5>' +
+            '</div>' +
+            '    <div class="col-md-4">' +
+
+            '    <input class="form-control" type="text" id="inputDespesa' + cont + '" placeholder="Nome depesa">' +
+            '</div>' +
+            '    <div class="col-md-4">' +
+
+            '       <input class="form-control" type="number" step=0.1 id="inputvalorDespesa' + cont + '" placeholder="valor boleto" onchange="somaDespesas()">' +
+            '   </div>' +
+            '    <div class="col-md-2">' +
+            '       <button class="btn btn-danger btn-sm btn-block" onClick="remove(value)" value="despesa' + cont + '" tabindex="false">remover</button>' +
+
+            '</div>' +
+            '</div>' +
+            '</div>'
+        );
+        cont++;
+        //somaDespesas();
+    })
+    function remove(dep) {
+        //e.preventDefault();
+        document.getElementById(dep).remove();
+        //cont--;
+        somaDespesas();
+        console.log(dep)
+    }
+
+    /*geral*/
+    function somaTotal() {
+        totalCredito = 0;
+        let TC = document.getElementById('TC').value ? parseFloat(document.getElementById('TC').value) : 0;
+        let TAB = document.getElementById('TC').value ? parseFloat(document.getElementById('TAB').value) : 0;
+    }
+
+
+    /*funções secundárias*/
+    function somaDespesas() {
+        console.log('mudou')
+        var totalDespesa = 0;
+        var contDespesa = 0;
+        /*quando exluir precisa recontar*/
+        for (let index = 1; index < cont; index++) {
+            if (document.getElementById('inputvalorDespesa' + index).value) {
+                console.log('inputvalorDespesa' + index);
+                contDespesa = document.getElementById('inputvalorDespesa' + index).value ? parseFloat(document.getElementById('inputvalorDespesa' + index).value) : 0;
+                totalDespesa += contDespesa;
+                //totalDespesa = contDepesa;
+                console.log(totalDespesa);
+            }
+
+        }
+        //cont = index;
+        document.getElementById('totalDespesas3').value = totalDespesa;
+        somaDeducoes();
+    }
+    let tarifas = 0;
+    function somaTarifas() {
+        let TC = document.getElementById('TC').value ? parseFloat(document.getElementById('TC').value) : 0;
+        let TAB = document.getElementById('TC').value ? parseFloat(document.getElementById('TAB').value) : 0;
+        let IOF = document.getElementById('TC').value ? parseFloat(document.getElementById('IOF').value) : 0;
+
+        tarifas = TC + TAB + IOF;
+        document.getElementById('totalTarifas').value = tarifas;
+        somaDeducoes();
+    }
+    function somaCtsRgt() {
+        document.getElementById('totalCstRgt').value = document.getElementById('inputCstRgt').value;
+        somaDeducoes();
+    }
+    function somaIQ() {
+        document.getElementById('totalIQ').value = document.getElementById('inputIQ').value;
+        somaDeducoes();
+    }
+    function somaCredito() {
+        document.getElementById('totalCredito').value = document.getElementById('inputCredito').value;
+        somaDeducoes();
+    }
+    function somaDeducoes() {
+        let totalDeducoes = 0;
+        let totalCtsrgt = document.getElementById('totalCstRgt').value ? parseFloat(document.getElementById('totalCstRgt').value) : 0;
+        let totalTarifas = document.getElementById('totalTarifas').value ? parseFloat(document.getElementById('totalTarifas').value) : 0;
+        let totalIQ = document.getElementById('totalIQ').value ? parseFloat(document.getElementById('totalIQ').value) : 0;
+        let totalDespesas3 = document.getElementById('totalDespesas3').value ? parseFloat(document.getElementById('totalDespesas3').value) : 0;
+
+        totalDeducoes = totalCtsrgt + totalTarifas + totalIQ + totalDespesas3;
+        //console.log(totalCtsrgt + '.' + totalTarifas + '.' + totalIQ + '.' + totalDespesas3);
+
+        document.getElementById('totalDeducoes').value = -totalDeducoes;
+        somaTotalC();
+    }
+    /*total de crédito*/
+    function somaTotalC() {
+        let totalC = parseFloat(document.getElementById('totalCredito').value) + parseFloat(document.getElementById('totalDeducoes').value);
+        document.getElementById('creditoCliente').value = totalC;
+        //console.log(parseFloat(document.getElementById('totalCredito').value) + parseFloat(document.getElementById('totalDeducoes').value))
+    }
+
+</script>
+
+</html>
